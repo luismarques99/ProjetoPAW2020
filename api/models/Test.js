@@ -24,11 +24,11 @@ const TestsSchema = new Schema({
 	},
 	user_state: {
 		type: String,
-		default: 'suspeito',
+		default: 'suspect',
 	},
 	test_state: {
 		type: String,
-		default: 'pendente',
+		default: 'pending',
 	},
 
 	test_result: {

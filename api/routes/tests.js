@@ -13,8 +13,9 @@ router
         testsController.getById(req, res, next);
     })
 
+    // FIXME: Não esta a funcionar. Nao encontra os testes para o utilizador definido
     // Get all tests for a userId
-    .get('/:userId', (req, res, next) => {
+    .get('/forUser/:userId', (req, res, next) => {
         testsController.getAllTesteUser(req, res, next);
     })
 

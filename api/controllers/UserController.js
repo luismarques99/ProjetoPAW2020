@@ -91,7 +91,7 @@ userController.updateUserById = (req, res, next) => {
 				res.json({
 					status: 'Success',
 					message: 'Utilizador atualizado com sucesso!',
-					data: null,
+					data: userInfo,
 				});
 			}
 		}

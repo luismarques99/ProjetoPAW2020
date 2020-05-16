@@ -82,7 +82,7 @@ testsController.create = (req, res, next) => {
 
 // Update a test by id
 testsController.updateById = (req, res, next) => {
-	userModel.findByIdAndUpdate(
+	testsModel.findByIdAndUpdate(
 		req.params.testesId,
 		{
 			saude24: req.body.information,
@@ -94,7 +94,10 @@ testsController.updateById = (req, res, next) => {
 			test_result: req.body.test_result,
 			priority: req.body.priority,
 		},
-		(err, testesInfo) => {
+		// FIXME: testInfo é a informação atual da base de dados, o objetivo é mostrar no put a informação que foi alterada,
+		// juntamente com o resto dos dados
+		// ISTO TRADUZ-SE PARA O RSTO DOS UPDATES
+		(err, testInfo) => {
 			if (err) {
 				next(err);
 			}
@@ -102,7 +105,7 @@ testsController.updateById = (req, res, next) => {
 				res.json({
 					status: 'Success',
 					message: 'Teste atualizado com sucesso!',
-					data: null,
+					data: testInfo,
 				});
 			}
 		}
@@ -118,7 +121,7 @@ testsController.getAllTesteUser = (req, res, next) => {
 				if (err.kind === 'ObjectId') {
 					return res.status(404).send({
 						message:
-							'Testes nao encontrados com este id!' +
+							'Testes nao encontrados com este id: 	' +
 							req.body.userId,
 					});
 				}
@@ -126,8 +129,14 @@ testsController.getAllTesteUser = (req, res, next) => {
 					message: 'Erro com este id: ' + req.params.userId,
 				});
 			}
-
-			res.send(testes);
+			else {
+				res.json({
+					status: 'Success',
+					message: 'Testes encontrados!',
+					data: testes
+				});
+			}
+			// res.send(testes);
 		});
 };
 
