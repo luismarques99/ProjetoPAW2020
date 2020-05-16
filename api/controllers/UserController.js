@@ -1,109 +1,146 @@
 const userModel = require('../models/User');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-module.exports = {
-	create: function (req, res, next) {
-		userModel.create(
-			{
-				name: req.body.name,
-				email: req.body.email,
-				password: req.body.password,
-			},
-			function (err, result) {
-				if (err) next(err);
-				else
-					res.json({
-						status: 'success',
-						message: 'User added successfully!!!',
-						data: null,
-					});
-			}
-		);
-	},
 
-	authenticate: function (req, res, next) {
-		userModel.findOne({ email: req.body.email }, function (err, userInfo) {
+const userController = {}
+
+// Create a new user
+userController.create = (req, res, next) => {
+	userModel.create(
+		{
+			name: req.body.name,
+			email: req.body.email,
+			password: req.body.password
+		},
+		(err, result) => {
 			if (err) {
 				next(err);
-			} else {
-				if (bcrypt.compareSync(req.body.password, userInfo.password)) {
-					const token = jwt.sign(
-						{ id: userInfo._id },
-						req.app.get('secretKey'),
-						{ expiresIn: '1h' }
-					);
-					res.json({
-						status: 'success',
-						message: 'user found!!!',
-						data: { user: userInfo, token: token },
-					});
-				} else {
-					res.json({
-						status: 'error',
-						message: 'Invalid email/password!!!',
-						data: null,
-					});
-				}
 			}
-		});
-	},
-	deleteById: function (req, res, next) {
-		userModel.findByIdAndRemove(req.params.userId, function (
-			err,
-			userInfo
-		) {
-			if (err) next(err);
 			else {
 				res.json({
-					status: 'success',
-					message: 'Utilizador apagado com sucesso!!!',
+					status: 'Success',
+					message: 'User added successfully!',
 					data: null,
 				});
 			}
-		});
-	},
-	updateuserById: function (req, res, next) {
-		userModel.findByIdAndUpdate(
-			req.params.userId,
-			{
-				name: req.body.name,
-				email: req.body.email,
-			},
-			function (err, userInfo) {
-				if (err) next(err);
-				else {
-					res.json({
-						status: 'success',
-						message: 'Utilizador atualizado com sucesso!!!',
-						data: null,
-					});
-				}
-			}
-		);
-	},
+		}
+	);
+};
 
-	getAll: function (req, res, next) {
-		let userList = [];
-		userModel.find({}, function (err, users) {
+// User login with jwt authentication
+userController.authenticate = (req, res, next) => {
+	userModel.findOne({ email: req.body.email }, (err, userInfo) => {
+		if (err) {
+			next(err);
+		}
+		else {
+			if (bcrypt.compareSync(req.body.password, userInfo.password)) {
+				const token = jwt.sign(
+					{ id: userInfo._id },
+					req.app.get('secretKey'),
+					{ expiresIn: '1h' }
+				);
+				res.json({
+					status: 'Success',
+					message: 'user found!',
+					data: { user: userInfo, token: token },
+				});
+			}
+			else {
+				res.json({
+					status: 'Error',
+					message: 'Invalid email/password!',
+					data: null,
+				});
+			}
+		}
+	});
+};
+
+// Delete a user
+userController.deleteById = (req, res, next) => {
+	userModel.findByIdAndRemove(req.params.userId, (err, userInfo) => {
+		if (err) {
+			next(err);
+		}
+		else {
+			res.json({
+				status: 'Success',
+				message: 'Utilizador apagado com sucesso!',
+				data: null,
+			});
+		}
+	});
+};
+
+// Edit a user
+userController.updateUserById = (req, res, next) => {
+	userModel.findByIdAndUpdate(
+		req.params.userId,
+		{
+			name: req.body.name,
+			email: req.body.email,
+			// FIXME: a password nao esta a ser editada corretamente, nao esta a ser encriptada antes de ser enviada para a BD
+			// password: req.body.password
+		},
+		(err, userInfo) => {
 			if (err) {
 				next(err);
-			} else {
-				for (let user of users) {
-					userList.push({
-						id: user._id,
-						name: user.name,
-						email: user.email,
-					});
-				}
+			}
+			else {
 				res.json({
-					status: 'success',
-					message: 'Utilizadores  Listados!!!',
-					data: { users: userList },
+					status: 'Success',
+					message: 'Utilizador atualizado com sucesso!',
+					data: null,
+				});
+			}
+		}
+	);
+};
+
+// List all users
+userController.getAll = (req, res, next) => {
+	let userList = [];
+	userModel.find({}, (err, users) => {
+		if (err) {
+			next(err);
+		} else {
+			for (let user of users) {
+				userList.push({
+					id: user._id,
+					name: user.name,
+					email: user.email,
+				});
+			}
+			res.json({
+				status: 'Success',
+				message: 'Utilizadores listados!',
+				data: { users: userList },
+			});
+		}
+	});
+};
+
+// Show user by id
+userController.getById = (req, res) => {
+	userModel
+		.findOne({ _id: req.params.userId })
+		.exec((err, user) => {
+			if (err) {
+				console.log(`Error: ${err}`);
+			}
+			else {
+				let userInfo = {}
+				userInfo.id = user._id;
+				userInfo.name = user.name;
+				userInfo.email = user.email;
+				res.json({
+					status: 'Success',
+					message: 'Utilizador listado!',
+					data: { user: userInfo }
 				});
 			}
 		});
-	},
+}
 
-
-
-};
+module.exports = userController;

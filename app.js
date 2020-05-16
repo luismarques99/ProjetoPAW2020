@@ -7,8 +7,8 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerJSDoc = require('swagger-jsdoc');
 const swaggerDocument = require('./swagger.json');
 
-const testes = require('./api/routes/testes');
-const users = require('./api/routes/users');
+const testesRouter = require('./api/routes/testes');
+const usersRouter = require('./api/routes/users');
 
 const mongoose = require('./api/config/database'); //database configuration
 
@@ -27,12 +27,6 @@ const options = {
 	apis: ['./users'], // Path to the API docs
 };
 const swaggerSpec = swaggerJSDoc(options);
-
-// connection to mongodb
-// mongoose.connection.on(
-// 	'error',
-// 	console.error.bind(console, 'MongoDB connection error:')
-// );
 
 function validateUser(req, res, next) {
 	jwt.verify(
@@ -53,23 +47,29 @@ function validateUser(req, res, next) {
 
 app
 	.set('secretKey', 'Y{ca%n75U!_>,@c') // jwt secret token
+
 	.use(logger('dev'))
+
 	.get('/api-docs.json', function (req, res) {
 		// line 41
 		res.setHeader('Content-Type', 'application/json');
 		res.send(swaggerSpec);
 	})
-	.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec))
+
+	.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
+
 	.use(bodyParser.urlencoded({ extended: false }))
+
 	.get('/', function (req, res) {
 		res.json({ estado: 'ok' });
 	})
 
 	// public route
-	.use('/users', users)
+	.use('/api/v1/users', usersRouter)
 
 	// private route
-	.use('/testes', validateUser, testes)
+	.use('/api/v1/testes', validateUser, testesRouter)
+
 	.get('/favicon.ico', function (req, res) {
 		res.sendStatus(204);
 	})

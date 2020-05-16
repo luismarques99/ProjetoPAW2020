@@ -1,5 +1,5 @@
 {
-  "name": "app",
+  "name": "covid_tests_manager",
   "version": "0.0.0",
   "private": true,
   "scripts": {
