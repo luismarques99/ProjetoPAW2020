@@ -20,7 +20,7 @@ userController.create = (req, res, next) => {
 				res.json({
 					status: 'Success',
 					message: 'User added successfully!',
-					data: null,
+					data: result,
 				});
 			}
 		}

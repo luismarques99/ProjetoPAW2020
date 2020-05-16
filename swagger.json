@@ -19,7 +19,7 @@
         },
         {
             "name": "Tests",
-            "description": "API for users in the system"
+            "description": "API for tests in the system"
         }
     ],
     "schemes": [
@@ -91,9 +91,9 @@
                 ],
                 "parameters": [
                     {
-                        "name": "user",
+                        "name": "body",
                         "in": "body",
-                        "description": "New name for the user",
+                        "description": "User with new values or properties",
                         "schema": {
                             "$ref": "#/definitions/UserEdit"
                         }
@@ -127,12 +127,78 @@
                     }
                 }
             }
+        },
+        "/users/register": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Register a new user",
+                "description": "Register a new user in the system",
+                "operationId": "register-new-user",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "body",
+                        "description": "New name for the user",
+                        "schema": {
+                            "$ref": "#/definitions/UserRegister"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Users registered",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                }
+            }
+        },
+        "/users/login": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Login a new user",
+                "description": "Login a new user in the system",
+                "operationId": "login-new-user",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "body",
+                        "description": "New name for the user",
+                        "schema": {
+                            "$ref": "#/definitions/UserLogin"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Users registered",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
         "User": {
+            "required": [
+                "name",
+                "email"
+            ],
             "properties": {
-                "_id": {
+                "id": {
                     "type": "string",
                     "uniqueItems": true
                 },
@@ -144,6 +210,10 @@
                     "uniqueItems": true
                 }
             }
+        },
+        "Users": {
+            "type": "array",
+            "$ref": "#/definitions/User"
         },
         "UserEdit": {
             "required": [
@@ -157,6 +227,40 @@
                 "email": {
                     "type": "string",
                     "uniqueItems": true
+                }
+            }
+        },
+        "UserRegister": {
+            "required": [
+                "name",
+                "email",
+                "password"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string",
+                    "uniqueItems": true
+                },
+                "password": {
+                    "type": "string"
+                }
+            }
+        },
+        "UserLogin": {
+            "required": [
+                "email",
+                "password"
+            ],
+            "properties": {
+                "email": {
+                    "type": "string",
+                    "uniqueItems": true
+                },
+                "password": {
+                    "type": "string"
                 }
             }
         }
