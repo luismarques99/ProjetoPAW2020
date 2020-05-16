@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 
 const swaggerUi = require('swagger-ui-express');
 const swaggerJSDoc = require('swagger-jsdoc');
-//const swaggerDocument = require('./swagger.json');
+const swaggerDocument = require('./swagger.json');
 
 const testes = require('./api/routes/testes');
 const users = require('./api/routes/users');
