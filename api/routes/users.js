@@ -2,22 +2,6 @@ const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/UserController');
 
-/**
- * @swagger
- * /:
- *   get:
- *     description: Returns all users
- *     produces:
- *      - application/json
- *     responses:
- *       200:
- *         description: users
- *         schema:
- *           type: array
- *           items:
- *             $ref: '#/definitions/User'
- */
-
 router
     // Get all users
     .get('/', (req, res, next) => {

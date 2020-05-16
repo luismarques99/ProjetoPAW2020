@@ -5,17 +5,17 @@ const TestsSchema = new Schema({
 	saude24: {
 		type: Boolean,
 		trim: true,
-		//required: true,
+		required: true,
 	},
 	risk_group: {
 		type: Boolean,
 		trim: true,
-		//required: true,
+		required: true,
 	},
 	risk_local: {
 		type: Boolean,
 		trim: true,
-		//required: true,
+		required: true,
 	},
 
 	information: {

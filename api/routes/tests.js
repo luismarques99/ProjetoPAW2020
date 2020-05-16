@@ -1,21 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const testsController = require('../controllers/TestController');
-/**
- * @swagger
- * /products:
- *   get:
- *     description: Returns all tests
- *     produces:
- *      - application/json
- *     responses:
- *       200:
- *         description: testes
- *         schema:
- *           type: array
- *           items:
- *             $ref: '#/definitions/Teste'
- */
 
 router
     // List all tests

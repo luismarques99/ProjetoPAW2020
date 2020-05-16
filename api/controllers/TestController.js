@@ -130,3 +130,5 @@ testsController.getAllTesteUser = (req, res, next) => {
 			res.send(testes);
 		});
 };
+
+module.exports = testsController;
