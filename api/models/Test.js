@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 //Define a schema
 const Schema = mongoose.Schema;
-const TestesSchema = new Schema({
+const TestsSchema = new Schema({
 	saude24: {
 		type: Boolean,
 		trim: true,
@@ -50,4 +50,4 @@ const TestesSchema = new Schema({
 		ref: 'User',
 	},
 });
-module.exports = mongoose.model('Testes', TestesSchema);
+module.exports = mongoose.model('Testes', TestsSchema);

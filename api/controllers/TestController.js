@@ -1,4 +1,4 @@
-const testesModel = require('../models/Teste');
+const testsModel = require('../models/Test');
 const userModel = require('../models/User');
 
 const testsController = {};
@@ -6,7 +6,7 @@ const testsController = {};
 // Show single test by id
 testsController.getById = (req, res, next) => {
 	console.log(req.body);
-	testesModel.findById(req.params.testesId, (err, testeInfo) => {
+	testsModel.findById(req.params.testesId, (err, testeInfo) => {
 		if (err) {
 			next(err);
 		} else {
@@ -21,7 +21,7 @@ testsController.getById = (req, res, next) => {
 
 // List all tests
 testsController.getAll = (req, res, next) => {
-	testesModel.find({}, (err, testes) => {
+	testsModel.find({}, (err, testes) => {
 		if (err) {
 			next(err);
 		} else {
@@ -36,7 +36,7 @@ testsController.getAll = (req, res, next) => {
 
 // Delete a test by id
 testsController.deleteById = (req, res, next) => {
-	testesModel.findByIdAndRemove(req.params.testesId, (err, testeInfo) => {
+	testsModel.findByIdAndRemove(req.params.testesId, (err, testeInfo) => {
 		if (err) {
 			next(err);
 		}
@@ -52,7 +52,7 @@ testsController.deleteById = (req, res, next) => {
 
 // Create a new test
 testsController.create = (req, res, next) => {
-	testesModel.create(
+	testsModel.create(
 		{
 			saude24: req.body.saude24,
 			risk_group: req.body.risk_group,
@@ -111,7 +111,7 @@ testsController.updateById = (req, res, next) => {
 
 // List all tests for a userId
 testsController.getAllTesteUser = (req, res, next) => {
-	testesModel
+	testsModel
 		.findById({ userId: req.params.userId })
 		.exec((err, testes) => {
 			if (err) {

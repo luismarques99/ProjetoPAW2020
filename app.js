@@ -7,7 +7,7 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerJSDoc = require('swagger-jsdoc');
 const swaggerDocument = require('./swagger.json');
 
-const testesRouter = require('./api/routes/testes');
+const testsRouter = require('./api/routes/tests');
 const usersRouter = require('./api/routes/users');
 
 const mongoose = require('./api/config/database'); //database configuration
@@ -68,7 +68,7 @@ app
 	.use('/api/v1/users', usersRouter)
 
 	// private route
-	.use('/api/v1/testes', validateUser, testesRouter)
+	.use('/api/v1/tests', validateUser, testsRouter)
 
 	.get('/favicon.ico', function (req, res) {
 		res.sendStatus(204);
