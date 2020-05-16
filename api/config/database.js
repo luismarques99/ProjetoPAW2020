@@ -1,17 +1,28 @@
+require('dotenv').config()
+
 //Set up mongoose connection
 const mongoose = require('mongoose');
-mongoose.set('useFindAndModify', false);
-
 mongoose.Promise = global.Promise;
-module.exports = mongoose;
+
+const MONGO_DB_HOST = process.env.MONGO_DB_HOST || 'localhost';
+const MONGO_DB_PORT = process.env.MONGO_DB_PORT || 27017;
+const MONGO_DB_NAME = process.env.MONGO_DB_NAME || 'covid-19'
 
 mongoose
-	.connect('mongodb://127.0.0.1:27017/covid-19', {
-		useUnifiedTopology: true,
-		useNewUrlParser: true,
-		useCreateIndex: true,
+	.connect(`mongodb://${MONGO_DB_HOST}:${MONGO_DB_PORT}/${MONGO_DB_NAME}`,
+		{
+			useNewUrlParser: true,
+			useUnifiedTopology: true,
+			useCreateIndex: true,
+			useFindAndModify: false
+		})
+	.then(() => {
+		console.log('Connected to MongoDB!')
 	})
-	.then(() => console.log('DB connected!'))
 	.catch((err) => {
-		console.log(`DB Connection Error: ${err.message}`);
+		console.log(`MongoDB Connection Error: ${err.message}`);
 	});
+
+mongoose.connection.on('error', console.error.bind(console, 'MongoDB connection error:'));
+
+module.exports = mongoose;

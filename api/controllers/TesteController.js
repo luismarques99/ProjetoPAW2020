@@ -1,5 +1,5 @@
-const testesModel = require('../../models/testes');
-const userModel = require('../../models/users');
+const testesModel = require('../models/Teste');
+const userModel = require('../models/User');
 module.exports = {
 	getById: function (req, res, next) {
 		console.log(req.body);

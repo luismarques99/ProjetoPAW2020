@@ -1,5 +1,6 @@
 // private route
 app.use('/testes', validateUser, testes);
+
 function validateUser(req, res, next) {
 	jwt.verify(
 		req.headers['x-access-token'],
