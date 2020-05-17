@@ -4,6 +4,13 @@
 
 Projeto realizado no âmbito da unidade curricular de **Programação em Ambiente Web** da **Escola Superior de Tecnologia e Gestão - P.Porto** para a época normal do ano letivo 2019/20.
 
+## Objetivo
+
+A aplicação web desenvolvida neste trabalho, foi idealizada para agilizar o processo de pedidos de teste de diagnóstico, agendamento de testes e registo do histórico de cada paciente testado no centro de análises.
+No pedido de teste de diagnóstico, o utilizador deverá indicar se foi encaminhado pela linha Saúde24, se pertence a um grupo de risco ou se trabalha em locais de risco.
+Após a realização do teste, a ficha do utilizador será alterada para ‘teste realizado’. Quando obtidos os resultados, será possível registar o resultado clínico na ficha do pedido do utilizador anexando um ficheiro (pdf) com os resultados clínicos e adicionando o resultado ao pedido.
+Por defeito, todos os pacientes estarão classificados como ‘suspeito’, e consoante os resultados de testes forem inseridos no histórico do paciente, a classificação será atualizada.
+
 ## Ferramentas
 
 - [Visual Studio Code](https://code.visualstudio.com/) - IDE para desenvolvimento
