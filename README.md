@@ -4,7 +4,7 @@
 
 Projeto realizado no âmbito da unidade curricular de **Programação em Ambiente Web** da **Escola Superior de Tecnologia e Gestão - P.Porto** para a época normal do ano letivo 2019/20.
 
-## Objetivo
+## Visão Geral
 
 A aplicação web desenvolvida neste trabalho, foi idealizada para agilizar o processo de pedidos de teste de diagnóstico, agendamento de testes e registo do histórico de cada paciente testado no centro de análises.
 
