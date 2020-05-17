@@ -1,4 +1,4 @@
-# :clipboard: ProjetoPAW2020 :clipboard:
+# :clipboard: Covid Tests Manager :clipboard:
 
 ## Âmbito
 
