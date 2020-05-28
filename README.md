@@ -19,7 +19,7 @@ Por defeito, todos os pacientes estarão classificados como ‘suspeito’, e co
 - [NodeJS](https://nodejs.org/en/) - Intrepretador de JavaScript
 - [ExpressJS](https://expressjs.com/) - Framework para NodeJs
 - [GitHub](https://github.com/) - Controlo de versões
-- [JWT](https://jwt.io/) - JSON Web Token to encode requests
+- [JWT](https://jwt.io/) - JSON Web Token para codificar pedidos
 - [Postman](https://www.postman.com/) - Plataforma de testes da RESTAPI
 - [MongoDB](https://www.mongodb.com/) - Base de dados
 - [MongoDB Compass](https://www.mongodb.com/products/compass) - Gestor da base de dados com interface visual
