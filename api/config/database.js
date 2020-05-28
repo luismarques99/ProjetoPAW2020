@@ -4,9 +4,11 @@ require('dotenv').config()
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
-const MONGO_DB_HOST = process.env.MONGO_DB_HOST || 'localhost';
-const MONGO_DB_PORT = process.env.MONGO_DB_PORT || 27017;
-const MONGO_DB_NAME = process.env.MONGO_DB_NAME || 'covid-19'
+const {
+	MONGO_DB_HOST,
+	MONGO_DB_PORT,
+	MONGO_DB_NAME
+} = process.env
 
 mongoose
 	.connect(`mongodb://${MONGO_DB_HOST}:${MONGO_DB_PORT}/${MONGO_DB_NAME}`,
