@@ -5,9 +5,9 @@ const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
 const {
-	MONGO_DB_HOST,
-	MONGO_DB_PORT,
-	MONGO_DB_NAME
+	MONGO_DB_HOST = 'localhost',
+	MONGO_DB_PORT = 27017,
+	MONGO_DB_NAME = 'covid-19'
 } = process.env
 
 mongoose
