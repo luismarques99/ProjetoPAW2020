@@ -1,0 +1,23 @@
+
+
+<div *ngIf="test" class="tests">
+<h1>Detalhes do Teste</h1>
+<h3> Id do Utilizador: {{test.data.testes.userId}}</h3>
+<h4> O utlizador está no estado: {{test.data.testes.user_state}}</h4>
+<h4>O resultado do teste é: {{test.data.testes.test_state}}</h4>
+
+<br>
+
+<h3>Outras Informações</h3>
+<br>
+<br>
+<h5>Observações: {{test.data.testes.information}}</h5>
+<h5>Contactou a linha Saúde24? {{test.data.testes.saude24}}</h5>
+<h5>É um doente de risco? {{test.data.testes.risk_group}}</h5>
+<h5>Esteve num local de risco? {{test.data.testes.risk_local}}</h5>
+
+<button style="float: right;"  class="btn btn-primary btn-sm" type="button"  routerLink="/tests-edit/{{test.data.testes._id}}">
+  Editar
+</button>
+</div>
+

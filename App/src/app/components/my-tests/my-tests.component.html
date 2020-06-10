@@ -1,0 +1,13 @@
+<div class="card bg-light mb-3" *ngFor="let t of Tests.data ; let i=index;">
+
+  <div class="card-header"  class="list-group-item list-group-item-action">Seu Id: {{t.userId}}
+  </div>
+  <div class="card-body">
+		<h5 class="card-title">O seu teste está no estado: {{t.test_state}}</h5>
+		<h5 class="card-title">O resultado do seu teste é: {{t.user_state}}</h5>
+		 <h5 class="card-title">A date do exame foi: {{t.date}}</h5>
+		 <div class="alert alert-warning" role="alert">
+		   Se o seu teste estiver no estado pendente ignore a data do exame
+		 </div>
+  </div>
+</div>

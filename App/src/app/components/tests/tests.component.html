@@ -1,0 +1,17 @@
+
+	<a class="nav-link" routerLink="/pendingtests" routerLinkActive="active">Visualizar Testes Pendentes</a>
+	  <a class="nav-link" routerLink="/prioritytests" routerLinkActive="active">Visualizar Testes Pendentes Prioritários</a>
+<div class="card bg-light mb-3"  *ngFor="let t of Tests.data.testes ; let i=index;">
+
+  <div class="card-header"  class="list-group-item list-group-item-action">Id utilizador: {{t.userId}}
+	</div>
+	<div class="card-body">
+		<h6 class="card-title"> Teste nº: {{i+1}}</h6>
+	</div>
+  <div class="card-body">
+    <h5 class="card-title">O teste está no estado: {{t.test_state}}</h5>
+
+	</div>
+	<button routerLink="/tests-detail/{{t._id}}" class="btn btn-primary btn-lg btn-block" >Ver
+	  Detalhes</button>
+</div>

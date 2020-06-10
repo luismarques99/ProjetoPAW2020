@@ -1,0 +1,26 @@
+<div class="row">
+    <div class="col-md-4 mx-auto">
+        <div class="card">
+            <div class="card-header">
+                LogIn
+            </div>
+            <div class="card-body">
+                <form [formGroup]="signinForm" (submit)="signIn()">
+                    <div class="form-group">
+                        <input type="text" [(ngModel)]="user.email" name="email" class="form-control"
+                          formControlName="email" placeholder="Email" required autofocus>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" [(ngModel)]="user.password" name="password" class="form-control"
+													formControlName="name" formControlName="password" placeholder="Password" required>
+													 <span class="badge badge-danger" *ngIf="noFound">E-mail e/ou password incorretos</span>
+                    </div>
+                    <button class="btn btn-success btn-block">
+                        LogIn
+										</button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
