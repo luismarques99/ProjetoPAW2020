@@ -4,7 +4,6 @@ const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
 
 const swaggerUi = require('swagger-ui-express');
-// const swaggerJSDoc = require('swagger-jsdoc');
 const swaggerDocument = require('./swagger.json');
 
 const testsRouter = require('./api/routes/tests');
@@ -13,26 +12,6 @@ const usersRouter = require('./api/routes/users');
 const mongoose = require('./api/config/database'); //database configuration
 
 const app = express();
-
-// const swaggerOptions = {
-// 	swaggerDefinition: {
-// 		info: {
-// 			title: 'Covid Tests Manager API',
-// 			description: 'REST API Covid Tests Manager application\n\nGitHub Repository: https://github.com/LuisMarques99/ProjetoPAW2020\n\nAuthors:\nDiogo Costa: https://github.com/diogocosta4\nLuis Marques: https://github.com/LuisMarques99\nLuis Teixeira: https://github.com/luisteixeira92',
-// 			version: '2.0.0',
-// 			contact: {
-// 				name: 'Grupo 39'
-// 			}
-// 		},
-// 		host: 'localhost:3000',
-// 		basePath: '/api/v1',
-// 	},
-// 	apis: [
-// 		'app.js',
-// 		'.api/routes/*.js'
-// 	]
-// };
-// const swaggerDocs = swaggerJSDoc(swaggerOptions);
 
 
 function validateUser(req, res, next) {
@@ -68,7 +47,6 @@ app.get('/api-docs.json', function (req, res) {
 })
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-// app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
