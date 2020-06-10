@@ -15,14 +15,15 @@ Por defeito, todos os pacientes estarão classificados como ‘suspeito’, e co
 
 ## Ferramentas
 
-- [Visual Studio Code](https://code.visualstudio.com/) - IDE para desenvolvimento
 - [NodeJS](https://nodejs.org/en/) - Intrepretador de JavaScript
-- [ExpressJS](https://expressjs.com/) - Framework para NodeJs
-- [GitHub](https://github.com/) - Controlo de versões
+- [ExpressJS](https://expressjs.com/) - Framework para backend
+- [Angular](https://angular.io/) - Framework para frontend
 - [JWT](https://jwt.io/) - JSON Web Token to encode requests
 - [Postman](https://www.postman.com/) - Plataforma de testes da RESTAPI
 - [MongoDB](https://www.mongodb.com/) - Base de dados
 - [MongoDB Compass](https://www.mongodb.com/products/compass) - Gestor da base de dados com interface visual
+- [Visual Studio Code](https://code.visualstudio.com/) - IDE para desenvolvimento
+- [GitHub](https://github.com/) - Controlo de versões
 - [Facebook Messenger](https://www.messenger.com/) - Comunicação entre os membros da equipa
 - [Discord](https://discord.com/) - Comunicação entre os membros da equipa
 
