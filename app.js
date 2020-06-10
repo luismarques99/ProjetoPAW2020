@@ -9,10 +9,15 @@ const swaggerDocument = require('./swagger.json');
 
 const testsRouter = require('./api/routes/tests');
 const usersRouter = require('./api/routes/users');
+const cors = require('cors');
 
 const mongoose = require('./api/config/database'); //database configuration
 
 const app = express();
+
+
+
+
 
 const options = {
 	// line 27
@@ -29,24 +34,26 @@ const options = {
 const swaggerSpec = swaggerJSDoc(options);
 
 function validateUser(req, res, next) {
-	jwt.verify(
-		req.headers['x-access-token'],
-		req.app.get('secretKey'),
-		function (err, decoded) {
-			if (err) {
-				res.json({ status: 'error', message: err.message, data: null });
-			} else {
-				// add user id to request
-				req.body.userId = decoded.id;
-				next();
-			}
+	jwt.verify(req.headers['x-access-token'], req.app.get('secretKey'), function (
+		err,
+		decoded
+	) {
+		if (err) {
+			res.json({ status: 'error', message: err.message, data: null });
+		} else {
+			// add user id to request
+			req.body.userId = decoded.id;
+			next();
 		}
-	);
+	});
 }
 
+app.set('secretKey', 'Y{ca%n75U!_>,@c'); // jwt secret token
+app.use(cors());
+app.use('/public', express.static('public'));
 
 app
-	.set('secretKey', 'Y{ca%n75U!_>,@c') // jwt secret token
+	.use(express.json())
 
 	.use(logger('dev'))
 
@@ -55,10 +62,10 @@ app
 		res.setHeader('Content-Type', 'application/json');
 		res.send(swaggerSpec);
 	})
-
 	.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 
 	.use(bodyParser.urlencoded({ extended: false }))
+	.use(bodyParser.json())
 
 	.get('/', function (req, res) {
 		res.json({ estado: 'ok' });

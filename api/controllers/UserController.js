@@ -2,7 +2,7 @@ const userModel = require('../models/User');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-const userController = {}
+const userController = {};
 
 // Create a new user
 userController.create = (req, res, next) => {
@@ -10,13 +10,12 @@ userController.create = (req, res, next) => {
 		{
 			name: req.body.name,
 			email: req.body.email,
-			password: req.body.password
+			password: req.body.password,
 		},
 		(err, result) => {
 			if (err) {
 				next(err);
-			}
-			else {
+			} else {
 				res.json({
 					status: 'Success',
 					message: 'User added successfully!',
@@ -32,20 +31,26 @@ userController.authenticate = (req, res, next) => {
 	userModel.findOne({ email: req.body.email }, (err, userInfo) => {
 		if (err) {
 			next(err);
-		}
-		else {
-			if (bcrypt.compareSync(req.body.password, userInfo.password)) {
-				const token = jwt.sign(
-					{ id: userInfo._id },
-					req.app.get('secretKey'),
-					{ expiresIn: '1h' }
-				);
-				res.json({
-					status: 'Success',
-					message: 'user found!',
-					data: { user: userInfo, token: token },
-				});
-			}
+		} else {
+			if (userInfo)
+				if (bcrypt.compareSync(req.body.password, userInfo.password)) {
+					const token = jwt.sign(
+						{ id: userInfo._id },
+						req.app.get('secretKey'),
+						{ expiresIn: '1h' }
+					);
+					res.json({
+						status: 'Success',
+						message: 'user found!',
+						data: { user: userInfo, token: token },
+					});
+				} else {
+					res.json({
+						status: 'Error',
+						message: 'Invalid email/password!',
+						data: null,
+					});
+				}
 			else {
 				res.json({
 					status: 'Error',
@@ -62,8 +67,7 @@ userController.deleteById = (req, res, next) => {
 	userModel.findByIdAndRemove(req.params.userId, (err, userInfo) => {
 		if (err) {
 			next(err);
-		}
-		else {
+		} else {
 			res.json({
 				status: 'Success',
 				message: 'Utilizador apagado com sucesso!',
@@ -86,8 +90,7 @@ userController.updateUserById = (req, res, next) => {
 		(err, userInfo) => {
 			if (err) {
 				next(err);
-			}
-			else {
+			} else {
 				res.json({
 					status: 'Success',
 					message: 'Utilizador atualizado com sucesso!',
@@ -123,24 +126,21 @@ userController.getAll = (req, res, next) => {
 
 // Show user by id
 userController.getById = (req, res) => {
-	userModel
-		.findOne({ _id: req.params.userId })
-		.exec((err, user) => {
-			if (err) {
-				console.log(`Error: ${err}`);
-			}
-			else {
-				let userInfo = {}
-				userInfo.id = user._id;
-				userInfo.name = user.name;
-				userInfo.email = user.email;
-				res.json({
-					status: 'Success',
-					message: 'Utilizador listado!',
-					data: { user: userInfo }
-				});
-			}
-		});
-}
+	userModel.findOne({ _id: req.params.userId }).exec((err, user) => {
+		if (err) {
+			console.log(`Error: ${err}`);
+		} else {
+			let userInfo = {};
+			userInfo.id = user._id;
+			userInfo.name = user.name;
+			userInfo.email = user.email;
+			res.json({
+				status: 'Success',
+				message: 'Utilizador listado!',
+				data: { user: userInfo },
+			});
+		}
+	});
+};
 
 module.exports = userController;

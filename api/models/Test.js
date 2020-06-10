@@ -24,11 +24,11 @@ const TestsSchema = new Schema({
 	},
 	user_state: {
 		type: String,
-		default: 'suspect',
+		default: 'suspeito',
 	},
 	test_state: {
 		type: String,
-		default: 'pending',
+		default: 'pendente',
 	},
 
 	test_result: {
@@ -41,10 +41,13 @@ const TestsSchema = new Schema({
 		default: false,
 	},
 
-	data: {
+	date: {
 		type: Date,
-		default: Date.now,
+	} /*
+	pdf: {
+		type: Array,
 	},
+*/,
 	userId: {
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'User',

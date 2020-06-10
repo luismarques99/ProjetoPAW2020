@@ -7,20 +7,23 @@ const UserSchema = new Schema({
 	name: {
 		type: String,
 		trim: true,
-		required: true
+		required: true,
 	},
 	email: {
 		type: String,
 		trim: true,
-		required: true
+		required: true,
 	},
 	password: {
 		type: String,
 		trim: true,
-		required: true
+		required: true,
 	},
-
-
+	role: {
+		type: Number,
+		trim: true,
+		default: 0,
+	},
 });
 // hash user password before saving into database
 UserSchema.pre('save', function (next) {
