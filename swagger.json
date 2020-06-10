@@ -5,10 +5,7 @@
         "title": "Covid Tests Manager API",
         "description": "REST API Covid Tests Manager application\n\nGitHub Repository: https://github.com/LuisMarques99/ProjetoPAW2020\n\nAuthors:\nDiogo Costa: https://github.com/diogocosta4\nLuis Marques: https://github.com/LuisMarques99\nLuis Teixeira: https://github.com/luisteixeira92",
         "contact": {
-            "GitHub Repository": "https://github.com/LuisMarques99/ProjetoPAW2020",
-            "Diogo Costa": "https://github.com/diogocosta4",
-            "Luis Marques": "https://github.com/LuisMarques99",
-            "Luis Teixeira": "https://github.com/luisteixeira92"
+            "name": "Grupo 39"
         }
     },
     "basePath": "/api/v1",
@@ -213,7 +210,9 @@
         },
         "Users": {
             "type": "array",
-            "$ref": "#/definitions/User"
+            "items": {
+                "$ref": "#/definitions/User"
+            }
         },
         "UserEdit": {
             "required": [
