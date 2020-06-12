@@ -1,5 +1,5 @@
 const Test = require('../models/Test');
-const User = require('../models/User');
+// const User = require('../models/User');
 
 const testsController = {};
 
@@ -108,11 +108,11 @@ testsController.create = (req, res, next) => {
 
 // Update a test by id
 testsController.updateById = (req, res, next) => {
-	// const reqFiles = [];
-	// const url = req.protocol + '://' + req.get('host');
-	// for (var i = 0; i < req.files.length; i++) {
-	// 	reqFiles.push(url + '/public/' + req.files[i].filename);
-	// }
+	const reqFiles = [];
+	const url = req.protocol + '://' + req.get('host');
+	for (var i = 0; i < req.files.length; i++) {
+		reqFiles.push(url + '/public/' + req.files[i].filename);
+	}
 
 	Test.findByIdAndUpdate(
 		req.params.testesId,
@@ -134,15 +134,15 @@ testsController.updateById = (req, res, next) => {
 
 // List all tests for a userId
 testsController.getAllTesteUser = (req, res, next) => {
-	Test.find({ userId: req.params.userId }).exec((err, testes) => {
+	Test.find({ userId: req.body.userId }).exec((err, testes) => {
 		if (err) {
 			if (err.kind === 'ObjectId') {
 				return res.status(404).send({
-					message: 'Testes nao encontrados com este id: ' + req.params.userId,
+					message: 'Testes nao encontrados com este id: ' + req.body.userId,
 				});
 			}
 			return res.status(500).send({
-				message: 'Erro com este id: ' + req.params.userId,
+				message: 'Erro com este id: ' + req.body.userId,
 			});
 		} else {
 			res.json({
