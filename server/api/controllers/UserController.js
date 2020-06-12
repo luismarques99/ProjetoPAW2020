@@ -81,14 +81,9 @@ userController.updateUserById = (req, res, next) => {
 		req.params.userId,
 		(() => {
 			if (req.body.password != null) {
-				return {
-					name: req.body.name,
-					email: req.body.email,
-					password: bcrypt.hashSync(req.body.password, saltRounds)
-				}
-			} else {
-				return req.body
+				req.body.password = bcrypt.hashSync(req.body.password, saltRounds);
 			}
+			return req.body
 		})(),
 		{ new: true },
 		(err, userInfo) => {
