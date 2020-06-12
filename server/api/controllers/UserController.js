@@ -69,7 +69,7 @@ userController.deleteById = (req, res, next) => {
 			res.json({
 				status: 'Success',
 				message: 'Utilizador apagado com sucesso!',
-				data: null,
+				data: userInfo,
 			});
 		}
 	});
