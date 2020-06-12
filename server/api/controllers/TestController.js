@@ -108,11 +108,7 @@ testsController.create = (req, res, next) => {
 
 // Update a test by id
 testsController.updateById = (req, res, next) => {
-	const reqFiles = [];
-	const url = req.protocol + '://' + req.get('host');
-	for (var i = 0; i < req.files.length; i++) {
-		reqFiles.push(url + '/public/' + req.files[i].filename);
-	}
+
 
 	Test.findByIdAndUpdate(
 		req.params.testesId,
@@ -154,5 +150,5 @@ testsController.getAllTesteUser = (req, res, next) => {
 	});
 };
 
-testsController.uploadFile = (req, res, next) => { };
+testsController.uploadFile = (req, res, next) => {};
 module.exports = testsController;

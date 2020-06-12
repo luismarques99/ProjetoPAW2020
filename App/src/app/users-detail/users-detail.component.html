@@ -1,0 +1,13 @@
+<div *ngIf="user" class="users">
+  <h1>Detalhes do Utlizador</h1>
+  <h3> Id do Utilizador: {{user.data.user._id}}</h3>
+  <h4> Nome: {{user.data.user.name}}</h4>
+  <h4> Email: {{user.data.user.email}}</h4>
+  <br>
+
+
+
+  <button style="float: right;" class="btn btn-primary btn-sm" type="button"
+    routerLink="/user-edit/{{test.data.user._id}}">
+    Alterar password
+  </button>

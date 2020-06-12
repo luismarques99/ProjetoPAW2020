@@ -13,6 +13,8 @@ import { TestSuccessComponent } from "./components/test-success/test-success.com
 import { TestsDetailComponent } from "./components/tests-detail/tests-detail.component";
 import { TestsEditComponent } from "./components/tests-edit/tests-edit.component";
 import { TestsComponent } from "./components/tests/tests.component";
+import { UsersDetailComponent } from "./users-detail/users-detail.component";
+import { UsersEditComponent } from "./users-edit/users-edit.component";
 import { UsersComponent } from "./users/users.component";
 
 const routes: Routes = [
@@ -81,6 +83,14 @@ const routes: Routes = [
   {
     path: "users",
     component: UsersComponent,
+  },
+  {
+    path: "update-user",
+    component: UsersEditComponent,
+  },
+  {
+    path: "user-detail",
+    component: UsersDetailComponent,
   },
 ];
 

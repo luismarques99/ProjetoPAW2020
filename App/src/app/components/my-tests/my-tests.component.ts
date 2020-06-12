@@ -16,6 +16,7 @@ export class MyTestsComponent implements OnInit {
     private App: AppComponent
   ) {}
   Tests: any = [];
+  user: any;
 
   ngOnInit() {
     this.getMyTests();
