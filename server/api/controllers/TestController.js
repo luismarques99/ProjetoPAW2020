@@ -5,7 +5,7 @@ const testsController = {};
 
 // Show single test by id
 testsController.getById = (req, res, next) => {
-	console.log(req.body);
+	// console.log(req.body);
 	Test.findById(req.params.testesId, (err, testeInfo) => {
 		if (err) {
 			next(err);
@@ -13,7 +13,7 @@ testsController.getById = (req, res, next) => {
 			res.json({
 				status: 'Success',
 				message: 'Testes encontrado!',
-				data: { testes: testeInfo },
+				data: testeInfo
 			});
 		}
 	});
@@ -108,8 +108,6 @@ testsController.create = (req, res, next) => {
 
 // Update a test by id
 testsController.updateById = (req, res, next) => {
-
-
 	Test.findByIdAndUpdate(
 		req.params.testesId,
 		req.body,
@@ -150,5 +148,5 @@ testsController.getAllTesteUser = (req, res, next) => {
 	});
 };
 
-testsController.uploadFile = (req, res, next) => {};
+testsController.uploadFile = (req, res, next) => { };
 module.exports = testsController;

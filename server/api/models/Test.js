@@ -40,6 +40,7 @@ const TestsSchema = new Schema({
 	},
 	date: {
 		type: Date,
+		default: null
 	},
 	pdf: {
 		type: Array,
