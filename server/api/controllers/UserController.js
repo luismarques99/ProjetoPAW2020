@@ -1,38 +1,35 @@
-const userModel = require('../models/User');
+const User = require('../models/User');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+
+const saltRounds = 10;
 
 const userController = {};
 
 // Create a new user
 userController.create = (req, res, next) => {
-	userModel.create(
-		{
-			name: req.body.name,
-			email: req.body.email,
-			password: req.body.password,
-		},
-		(err, result) => {
-			if (err) {
-				next(err);
-			} else {
-				res.json({
-					status: 'Success',
-					message: 'User added successfully!',
-					data: result,
-				});
-			}
+	const user = new User(req.body);
+
+	user.save((err, result) => {
+		if (err) {
+			next(err);
+		} else {
+			res.json({
+				status: 'Success',
+				message: 'User added successfully!',
+				data: result,
+			});
 		}
-	);
+	});
 };
 
 // User login with jwt authentication
 userController.authenticate = (req, res, next) => {
-	userModel.findOne({ email: req.body.email }, (err, userInfo) => {
+	User.findOne({ email: req.body.email }, (err, userInfo) => {
 		if (err) {
 			next(err);
 		} else {
-			if (userInfo)
+			if (userInfo) {
 				if (bcrypt.compareSync(req.body.password, userInfo.password)) {
 					const token = jwt.sign(
 						{ id: userInfo._id },
@@ -51,6 +48,7 @@ userController.authenticate = (req, res, next) => {
 						data: null,
 					});
 				}
+			}
 			else {
 				res.json({
 					status: 'Error',
@@ -64,14 +62,14 @@ userController.authenticate = (req, res, next) => {
 
 // Delete a user
 userController.deleteById = (req, res, next) => {
-	userModel.findByIdAndRemove(req.params.userId, (err, userInfo) => {
+	User.findByIdAndRemove(req.params.userId, (err, userInfo) => {
 		if (err) {
 			next(err);
 		} else {
 			res.json({
 				status: 'Success',
 				message: 'Utilizador apagado com sucesso!',
-				data: null,
+				data: userInfo,
 			});
 		}
 	});
@@ -79,14 +77,15 @@ userController.deleteById = (req, res, next) => {
 
 // Edit a user
 userController.updateUserById = (req, res, next) => {
-	userModel.findByIdAndUpdate(
+	User.findByIdAndUpdate(
 		req.params.userId,
-		{
-			name: req.body.name,
-			email: req.body.email,
-			// FIXME: a password nao esta a ser editada corretamente, nao esta a ser encriptada antes de ser enviada para a BD
-			// password: req.body.password
-		},
+		(() => {
+			if (req.body.password != null) {
+				req.body.password = bcrypt.hashSync(req.body.password, saltRounds);
+			}
+			return req.body
+		})(),
+		{ new: true },
 		(err, userInfo) => {
 			if (err) {
 				next(err);
@@ -104,7 +103,7 @@ userController.updateUserById = (req, res, next) => {
 // List all users
 userController.getAll = (req, res, next) => {
 	let userList = [];
-	userModel.find({}, (err, users) => {
+	User.find({}, (err, users) => {
 		if (err) {
 			next(err);
 		} else {
@@ -126,7 +125,7 @@ userController.getAll = (req, res, next) => {
 
 // Show user by id
 userController.getById = (req, res) => {
-	userModel.findOne({ _id: req.params.userId }).exec((err, user) => {
+	User.findOne({ _id: req.params.userId }).exec((err, user) => {
 		if (err) {
 			console.log(`Error: ${err}`);
 		} else {

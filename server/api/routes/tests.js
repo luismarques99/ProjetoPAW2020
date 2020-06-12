@@ -23,7 +23,6 @@ router
 		testsController.getById(req, res, next);
 	})
 
-	// FIXME: Não esta a funcionar. Nao encontra os testes para o utilizador definido
 	// Get all tests for a userId
 	.get('/forUser/:userId', (req, res, next) => {
 		testsController.getAllTesteUser(req, res, next);
@@ -37,7 +36,13 @@ router
 	// Delete a test by id
 	.delete('/:testesId', (req, res, next) => {
 		testsController.deleteById(req, res, next);
+	})
+
+	// Edit a test by id
+	.put('/:testesId', /* upload.array('pdf', 6)*/(req, res, next) => {
+		testsController.updateById(req, res, next);
 	});
+
 /*
 const storage = multer.diskStorage({
 	destination: (req, file, cb) => {
@@ -67,12 +72,5 @@ var upload = multer({
 	},
 });
 */
-// Edit a test by id
-router.put(
-	'/:testesId',
-	/* upload.array('pdf', 6)*/ (req, res, next) => {
-		testsController.updateById(req, res, next);
-	}
-);
 
 module.exports = router;
