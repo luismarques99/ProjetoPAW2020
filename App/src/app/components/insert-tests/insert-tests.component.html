@@ -1,0 +1,75 @@
+<form  (submit)="insertTests()">
+	 <h1>Teste Diagnóstico</h1>
+	<br>
+	<br>
+		<h4>
+		  Alguma vez contactou a linha Saúde 24?</h4>
+  <div class="custom-control custom-radio custom-control-inline">
+
+    <input type="radio" id="saude24" [(ngModel)]="tests.saude24" name="saude24" class="custom-control-input"
+      value="true" checked>
+
+    <label class="custom-control-label" for="saude24">Sim</label>
+  </div>
+  <div class="custom-control custom-radio custom-control-inline">
+    <input type="radio" id="saude24op2" [(ngModel)]="tests.saude24" name="saude24" class="custom-control-input"
+      value="false">
+    <label class="custom-control-label" for="saude24op2">Não</label>
+	</div>
+
+	<br>
+	<br>
+	<br>
+	<h4>
+		Faz parte de um grupo de risco?</h4>
+
+	<div class="custom-control custom-radio custom-control-inline">
+
+	  <input type="radio" id="risk_group" [(ngModel)]="tests.risk_group" name="risk_group" class="custom-control-input"
+	    value="true" checked>
+
+	  <label class="custom-control-label" for="risk_group">Sim</label>
+	</div>
+
+	<div class="custom-control custom-radio custom-control-inline">
+	  <input type="radio" id="riskgroupop2" [(ngModel)]="tests.risk_group" name="risk_group"
+	    class="custom-control-input" value="false">
+	  <label class="custom-control-label" for="riskgroupop2">Não</label>
+	</div>
+	<br>
+ 	<a href="https://www.sns24.gov.pt/tema/doencas-infecciosas/covid-19/grupos-de-risco/#sec-0" aria-pressed="true">
+ 	  Veja aqui quais são os grupos de risco</a>
+  	<br>
+  	<br>
+  	<br>
+  	<h4>
+  	  Esteve num local de risco nas 2 últimas semanas?</h4>
+
+  	<div class="custom-control custom-radio custom-control-inline">
+
+  	  <input type="radio" id="risk_local" [(ngModel)]="tests.risk_local" name="risk_local"
+  	    class="custom-control-input" value="true" checked>
+
+  	  <label class="custom-control-label" for="risk_local">Sim</label>
+  	</div>
+
+  	<div class="custom-control custom-radio custom-control-inline">
+  	  <input type="radio" id="risklocalop2" [(ngModel)]="tests.risk_local" name="risk_local"
+  	    class="custom-control-input" value="false">
+  	  <label class="custom-control-label" for="risklocalop2">Não</label>
+		</div>
+			<br>
+			<br>
+			<br>
+			<h4>
+			  Observações que gostaria de mencionar</h4>
+   <div class="form-group">
+     <label for="observationsTextarea1"></label>
+     <textarea class="form-control" id="observationsTextarea1" [(ngModel)]="tests.information" name="information"
+       rows="8"></textarea>
+   </div>
+
+	<button class="btn btn-success btn-block">Submeter o Diagnóstico</button>
+
+
+</form>
