@@ -32,7 +32,7 @@ const TestsSchema = new Schema({
 	},
 	test_result: {
 		type: String,
-		default: null,
+		default: 'indefinido',
 	},
 	priority: {
 		type: Boolean,
@@ -41,12 +41,13 @@ const TestsSchema = new Schema({
 	date: {
 		type: Date,
 	},
-	// pdf: {
-	// 	type: Array,
-	// },
+	pdf: {
+		type: Array,
+	},
 	userId: {
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'User',
 	}
 });
+
 module.exports = mongoose.model('Testes', TestsSchema);
