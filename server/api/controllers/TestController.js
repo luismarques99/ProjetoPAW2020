@@ -76,14 +76,14 @@ testsController.getPendingTests = (req, res, next) => {
 
 // Delete a test by id
 testsController.deleteById = (req, res, next) => {
-	Test.findByIdAndRemove(req.params.testesId, (err, testeInfo) => {
+	Test.findByIdAndRemove(req.params.testesId, (err, testInfo) => {
 		if (err) {
 			next(err);
 		} else {
 			res.json({
 				status: 'Success',
 				message: 'Teste apagado com sucesso!',
-				data: null,
+				data: testInfo,
 			});
 		}
 	});
@@ -104,35 +104,6 @@ testsController.create = (req, res, next) => {
 			});
 		}
 	});
-
-	// Test.create(
-	// 	{
-	// 		saude24: req.body.saude24,
-	// 		risk_group: req.body.risk_group,
-	// 		risk_local: req.body.risk_local,
-	// 		information: req.body.information,
-	// 		user_state: req.body.user_state,
-	// 		test_state: req.body.test_state,
-	// 		test_result: req.body.test_result,
-
-	// 		//pdf: req.files,
-	// 		priority: req.body.priority,
-	// 		date: req.body.date,
-	// 		userId: req.body.userId,
-	// 	},
-	// 	(err, result) => {
-	// 		if (err) {
-	// 			console.log(err);
-	// 			next(err);
-	// 		} else {
-	// 			res.json({
-	// 				status: 'Success',
-	// 				message: 'Teste adicionado com sucesso!',
-	// 				data: result,
-	// 			});
-	// 		}
-	// 	}
-	// );
 };
 
 // Update a test by id
@@ -163,11 +134,11 @@ testsController.updateById = (req, res, next) => {
 
 // List all tests for a userId
 testsController.getAllTesteUser = (req, res, next) => {
-	Test.find({ userId: req.body.userId }).exec((err, testes) => {
+	Test.find({ userId: req.params.userId }).exec((err, testes) => {
 		if (err) {
 			if (err.kind === 'ObjectId') {
 				return res.status(404).send({
-					message: 'Testes nao encontrados com este id: 	' + req.body.userId,
+					message: 'Testes nao encontrados com este id: ' + req.params.userId,
 				});
 			}
 			return res.status(500).send({
@@ -180,7 +151,6 @@ testsController.getAllTesteUser = (req, res, next) => {
 				data: testes,
 			});
 		}
-		// res.send(testes);
 	});
 };
 

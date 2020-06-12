@@ -8,7 +8,7 @@ router
 		userController.getAll(req, res, next);
 	})
 
-
+	// Get a user by its ID
 	.get('/:userId', (req, res) => {
 		userController.getById(req, res);
 	})
