@@ -8,24 +8,19 @@ const userController = {};
 
 // Create a new user
 userController.create = (req, res, next) => {
-	User.create(
-		{
-			name: req.body.name,
-			email: req.body.email,
-			password: req.body.password,
-		},
-		(err, result) => {
-			if (err) {
-				next(err);
-			} else {
-				res.json({
-					status: 'Success',
-					message: 'User added successfully!',
-					data: result,
-				});
-			}
+	const user = new User(req.body);
+
+	user.save((err, result) => {
+		if (err) {
+			next(err);
+		} else {
+			res.json({
+				status: 'Success',
+				message: 'User added successfully!',
+				data: result,
+			});
 		}
-	);
+	});
 };
 
 // User login with jwt authentication
@@ -84,11 +79,17 @@ userController.deleteById = (req, res, next) => {
 userController.updateUserById = (req, res, next) => {
 	User.findByIdAndUpdate(
 		req.params.userId,
-		{
-			name: req.body.name,
-			email: req.body.email,
-			password: bcrypt.hashSync(req.body.password, saltRounds),
-		},
+		(() => {
+			if (req.body.password != null) {
+				return {
+					name: req.body.name,
+					email: req.body.email,
+					password: bcrypt.hashSync(req.body.password, saltRounds)
+				}
+			} else {
+				return req.body
+			}
+		})(),
 		{ new: true },
 		(err, userInfo) => {
 			if (err) {
