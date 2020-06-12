@@ -5,7 +5,7 @@ let FILES_DIR = './public/images';
 
 const testsController = require('../controllers/TestController');
 
-const storage = multer.diskStorage({
+/*const storage = multer.diskStorage({
 	destination: (req, file, cb) => {
 		cb(null, FILES_DIR);
 	},
@@ -14,6 +14,7 @@ const storage = multer.diskStorage({
 		cb(null, fileName);
 	},
 });
+
 
 const upload = multer({
 	storage: storage,
@@ -34,7 +35,7 @@ const upload = multer({
 		}
 	},
 });
-
+*/
 router
 	// List all tests
 	.get('/', (req, res, next) => {
@@ -71,8 +72,11 @@ router
 	})
 
 	// Edit a test by id
-	.put('/:testesId', upload.array('pdf', 6), (req, res, next) => {
-		testsController.updateById(req, res, next);
-	});
+	.put(
+		'/:testesId',
+		/*upload.array('pdf', 6)*/ (req, res, next) => {
+			testsController.updateById(req, res, next);
+		}
+	);
 
 module.exports = router;

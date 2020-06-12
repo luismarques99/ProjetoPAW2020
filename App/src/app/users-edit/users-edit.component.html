@@ -1,0 +1,18 @@
+<div class="card bg-light mb-3" *ngFor="let t of Users.data.users ; let i=index;">
+
+  <br>
+  <br>
+  <h4>PASSWORD</h4>
+  <div class="input-group mb-3">
+
+    <input [(ngModel)]="usersData.data.users.password" type="text" class="form-control"
+      aria-describedby="inputGroup-sizing-default">
+  </div>
+
+  <br>
+  <br>
+
+  <div>
+    <button class="btn btn-primary btn-lg btn-block" (click)="delete(t.id)">Atualizar password</button>
+  </div>
+</div>

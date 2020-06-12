@@ -20,6 +20,8 @@ import { DragDropFileUploadDirective } from "./drag-drop-file-upload.directive";
 import { TokenInterceptorService } from "./services/token-interceptor.service";
 import { UsersComponent } from './users/users.component';
 import { UsersDeleteComponent } from './users-delete/users-delete.component';
+import { UsersEditComponent } from './users-edit/users-edit.component';
+import { UsersDetailComponent } from './users-detail/users-detail.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,8 @@ import { UsersDeleteComponent } from './users-delete/users-delete.component';
     DragDropFileUploadDirective,
     UsersComponent,
     UsersDeleteComponent,
+    UsersEditComponent,
+    UsersDetailComponent,
   ],
   imports: [
     ReactiveFormsModule,
