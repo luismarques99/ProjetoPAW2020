@@ -1,45 +1,38 @@
 <h2>Análise do Teste</h2>
-<br>
-<br>
-<br>
-
-
-  <h4>Estado do utilizador</h4>
+<br />
+<br />
+<br />
+<h4>Estado do utilizador</h4>
 <div class="input-group mb-3">
-
-<br>
-<br>
-<br>
-
-
-
-
-  <input [(ngModel)]="testsData.data.testes.user_state" type="text" class="form-control"
-		aria-describedby="inputGroup-sizing-default">
+  <input [(ngModel)]="testsData.data.user_state" type="text" class="form-control"
+    aria-describedby="inputGroup-sizing-default" />
 </div>
+<br />
+<br />
+<h4>Estado do teste</h4>
+<div class="input-group mb-3">
+  <input [(ngModel)]="testsData.data.test_state" type="text" class="form-control"
+    aria-describedby="inputGroup-sizing-default" />
+</div>
+<br />
+<br />
 <h4>Resultado do teste</h4>
 <div class="input-group mb-3">
-
-  <input [(ngModel)]="testsData.data.testes.test_state" type="text" class="form-control"
-    aria-describedby="inputGroup-sizing-default">
+  <input [(ngModel)]="testsData.data.test_result" type="text" class="form-control"
+    aria-describedby="inputGroup-sizing-default" />
 </div>
-
-<br>
-<br>
+<br />
+<br />
 <h4>Data do exame</h4>
 <div class="input-group mb-3">
-
-  <input [(ngModel)]="testsData.data.testes.date" type="text" class="form-control"
-    aria-describedby="inputGroup-sizing-default">
+  <input [(ngModel)]="testsData.data.date" type="text" class="form-control"
+    aria-describedby="inputGroup-sizing-default" />
 </div>
-
-<br>
-<br>
-<div class="container fileUploadWrapper">
-
-</div>
+<br />
+<br />
+<div class="container fileUploadWrapper"></div>
 <div>
-		<button class="btn btn-primary btn-lg btn-block"  (click)="updateTest()">Atualizar</button>
+  <button class="btn btn-primary btn-lg btn-block" (click)="updateTest()">
+    Atualizar
+  </button>
 </div>
-
-
